@@ -1,4 +1,4 @@
-(ns harai.coverage
+(ns aratame.coverage
   "What a sweep is allowed to claim.
 
   A sweep that examined nothing and a sweep that examined everything and found
@@ -9,7 +9,7 @@
   The exit codes follow the same rule: `2` is reserved for *could not answer*
   and is neither the success code nor the found-something code, so a caller
   that only checks `if exit == 0` cannot read an unanswered sweep as success."
-  (:require [harai.taxonomy :as tax]))
+  (:require [aratame.taxonomy :as tax]))
 
 (defn tally [verdicts]
   (reduce (fn [m v] (update m (:verdict/value v) (fnil inc 0)))

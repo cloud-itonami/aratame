@@ -1,4 +1,4 @@
-(ns harai.indicators
+(ns aratame.indicators
   "The indicator set a verdict is computed against, and how old it is.
 
   An antivirus with a stale signature database returns the same 'nothing found'

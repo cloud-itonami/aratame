@@ -1,4 +1,4 @@
-(ns harai.adapters
+(ns aratame.adapters
   "Translation from the shapes that already exist in this workspace into the
   two shapes this repository judges: an indicator, and a subject.
 
@@ -74,7 +74,7 @@
 (defn misogi-fact->subject
   "A gftdcojp/misogi fact — the map its rules match against — as a subject.
 
-  misogi decides what to do with a Mac's own files; harai decides whether a
+  misogi decides what to do with a Mac's own files; aratame decides whether a
   thing is malicious. Feeding one into the other is the whole integration, so
   this function is deliberately the only place that knows both shapes."
   [{:keys [path bundle-id program persistence signature sha256 md5] :as fact}]

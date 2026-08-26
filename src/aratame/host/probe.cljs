@@ -1,4 +1,4 @@
-(ns harai.host.probe
+(ns aratame.host.probe
   "The effectful edge: hashing a file, asking macOS what it thinks of it, and
   saying so honestly when it cannot ask.
 
@@ -59,7 +59,7 @@
 (defn platform-blocklist
   "Apple's own malware blocklist version and Gatekeeper's state.
 
-  harai reports this because it is more consequential than any list harai
+  aratame reports this because it is more consequential than any list aratame
   ships: on a Mac, XProtect is the antivirus, and the honest position of this
   repository is to say how current it is rather than to compete with it."
   []
@@ -71,7 +71,7 @@
       (catch :default e {:probe/status :error :probe/detail (.-message e)}))))
 
 (defn probe-file
-  "Every probe for one path, as the map `harai.verdict/judge` consumes, plus
+  "Every probe for one path, as the map `aratame.verdict/judge` consumes, plus
   the subject facts those probes established."
   [path]
   (let [h (sha256-file path)

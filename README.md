@@ -1,13 +1,20 @@
-# harai 祓 — governed malware verdict plane
+# aratame 改め — governed malware verdict plane
 
-**祓 (harai) is the rite of removing what has been judged impure.** The name does
-not say what this does, so it says it here first, as this workspace requires of
-metaphor-named repositories: **harai turns evidence about a file into a verdict,
-and governs what anyone is allowed to do about that verdict.** It is a
-`cloud-itonami` actor; it lives at `orgs/cloud-itonami/harai`.
+**改め (aratame) is the old word for an official examination — 関所改め, the
+inspection at a checkpoint that decides what may pass.** The name does not say
+what this does, so it says it here first, as this workspace requires of
+metaphor-named repositories: **aratame turns evidence about a file into a
+verdict, and governs what anyone is allowed to do about that verdict.** It is a
+`cloud-itonami` actor; it lives at `orgs/cloud-itonami/aratame`.
+
+(It was called `harai` 祓 for the first hour of its life, until the concept index
+surfaced `cloud-itonami/app-harai` — 払い, payment and settlement clearing —
+under the same reading in the same org. Two repositories a person cannot tell
+apart when speaking are worse than one awkward name, and the index that found
+the collision is the same one this repository added.)
 
 It is not a scanner. It ships no detection engine, no signature database it
-maintains, and no real-time hook. On a Mac, XProtect is the antivirus — `harai
+maintains, and no real-time hook. On a Mac, XProtect is the antivirus — `aratame
 doctor` reports XProtect's version rather than competing with it.
 
 What it owns is the part nothing in this workspace owned: **the decision, and the
@@ -26,18 +33,18 @@ So here it is not representable:
 
 | | |
 |---|---|
-| `harai.taxonomy/verdicts` | contains **`:unmeasured`**, ranked *above* `:clean`. Not knowing is a louder state than knowing there is nothing, because it is the one that needs a person. |
-| `harai.taxonomy/actions` | contains `:report`, `:quarantine`, `:block` and **no `:delete`**. Destroying bytes is not in the codomain, so no policy and no future caller can request it. Reversal is [`kotoba-lang/quarantine`](https://github.com/kotoba-lang/quarantine)'s job and stays there. |
-| `harai.coverage/summarize` | over an empty verdict list returns **`:refused`**, not clean. A sweep that examined nothing may not say it found nothing. |
+| `aratame.taxonomy/verdicts` | contains **`:unmeasured`**, ranked *above* `:clean`. Not knowing is a louder state than knowing there is nothing, because it is the one that needs a person. |
+| `aratame.taxonomy/actions` | contains `:report`, `:quarantine`, `:block` and **no `:delete`**. Destroying bytes is not in the codomain, so no policy and no future caller can request it. Reversal is [`kotoba-lang/quarantine`](https://github.com/kotoba-lang/quarantine)'s job and stays there. |
+| `aratame.coverage/summarize` | over an empty verdict list returns **`:refused`**, not clean. A sweep that examined nothing may not say it found nothing. |
 | exit codes | `0` nothing found · `1` something found · **`2` could not answer**. `2` is neither of the other two, so a caller that checks `if exit == 0` cannot read an unanswered sweep as success. |
 
-Out of the box, with no feed configured, harai answers `:unmeasured` for every
+Out of the box, with no feed configured, aratame answers `:unmeasured` for every
 file and exits `2`. That is the correct first answer, and it is the behaviour a
 scanner cannot produce.
 
 ## The three rules in the decision core
 
-`harai.verdict/judge` is pure — facts in, verdict out, the clock passed as an
+`aratame.verdict/judge` is pure — facts in, verdict out, the clock passed as an
 argument.
 
 1. **A required probe that did not answer ends the computation.** Not a
@@ -55,10 +62,10 @@ argument.
 
 ## The gate does not trust what it gates
 
-`harai.governor/admit` recounts corroboration from `:verdict/signals` instead of
+`aratame.governor/admit` recounts corroboration from `:verdict/signals` instead of
 reading `:verdict/value`. A containment structure whose gate believes the thing
 it contains is decoration. It refuses by default, and every reason it can give
-is a literal in the closed sets `harai.taxonomy/refusals` and `escalations`:
+is a literal in the closed sets `aratame.taxonomy/refusals` and `escalations`:
 
 ```
 :refuse/action-not-admitted  :refuse/verdict-unmeasured  :refuse/no-corroboration
@@ -72,10 +79,10 @@ indistinguishable from a gate that permitted everything.
 
 ## Where it sits
 
-harai invents no vocabulary. Each producer that already exists here has exactly
-one translation into it, in `harai.adapters`:
+aratame invents no vocabulary. Each producer that already exists here has exactly
+one translation into it, in `aratame.adapters`:
 
-| producer | what it gives harai |
+| producer | what it gives aratame |
 |---|---|
 | [`cloud-itonami/threat-intelligence`](https://github.com/cloud-itonami/threat-intelligence) | `IndicatorRecord` — hashes, domains, addresses, with its own 0–1000 permille confidence and TLP class, carried through unrescaled |
 | [`cloud-itonami/yabai`](https://github.com/cloud-itonami/yabai) | `MalwareSample` — sample hashes, C2 domains and addresses, `vt_detection_rate` as a reputation input |
@@ -87,9 +94,9 @@ one translation into it, in `harai.adapters`:
 
 ```sh
 npm test                                    # 31 tests, 103 assertions, nbb
-npm run harai -- doctor                     # XProtect version, Gatekeeper, feed freshness
-npm run harai -- scan ~/Downloads
-npm run harai -- scan ~/Downloads --indicators ti-export.edn --ledger run.edn
+npm run aratame -- doctor                     # XProtect version, Gatekeeper, feed freshness
+npm run aratame -- scan ~/Downloads
+npm run aratame -- scan ~/Downloads --indicators ti-export.edn --ledger run.edn
 ```
 
 `docs/operator-quickstart.md` has each of those with the output actually
@@ -101,12 +108,12 @@ directory.
 Stated plainly, because a security tool's gaps are the part worth reading:
 
 - **No real-time protection.** There is no EndpointSecurity client and no
-  on-access hook. harai judges what it is pointed at, when it is pointed at it.
+  on-access hook. aratame judges what it is pointed at, when it is pointed at it.
 - **No content inspection.** Verdicts come from identifiers, signing state,
   provenance and structural facts. There is no unpacking, no emulation, no YARA
   evaluation — `yabai`'s `MalwareSample.yara_rules` is carried as evidence, not
   evaluated.
-- **The bundled seed expires by design.** `resources/harai/indicators.seed.edn`
+- **The bundled seed expires by design.** `resources/aratame/indicators.seed.edn`
   dates itself and the default floor is 7 days, so a week after it was written
   every verdict computed against it alone becomes `:unmeasured`. A bundled list
   with no expiry is precisely how a product ends up asserting "clean" from a

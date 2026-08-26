@@ -1,4 +1,4 @@
-# harai — operator quickstart
+# aratame — operator quickstart
 
 Every command below was run on 2026-08-26 on macOS 26 (arm64, nbb 1.4.x) and the
 output is what came back, unedited. Where a run exits non-zero, that is the
@@ -7,7 +7,7 @@ intended result and the reason is given.
 ## Install and test
 
 ```sh
-cd orgs/cloud-itonami/harai
+cd orgs/cloud-itonami/aratame
 npm install          # nbb only
 npm test
 ```
@@ -31,32 +31,32 @@ once, in place, and only its own test failed —
 ## 1. What is this machine's actual antivirus
 
 ```sh
-bin/harai doctor
+bin/aratame doctor
 ```
 
 ```
 PLATFORM	answered	xprotect=5356	gatekeeper=enabled
-INDICATORS	…/resources/harai/indicators.seed.edn	count=2	stale=false
-NOTE	On a Mac, XProtect is the antivirus. harai judges what it is given and governs what may be done about it; it does not replace that.
+INDICATORS	…/resources/aratame/indicators.seed.edn	count=2	stale=false
+NOTE	On a Mac, XProtect is the antivirus. aratame judges what it is given and governs what may be done about it; it does not replace that.
 ```
 
 `xprotect=5356` is Apple's blocklist version on this machine. That number is
-more consequential than anything harai ships, which is why it is the first line
+more consequential than anything aratame ships, which is why it is the first line
 of output.
 
 ## 2. A scan that finds something
 
 ```sh
-mkdir -p /tmp/harai-demo
-printf 'X5O!P%%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' > /tmp/harai-demo/sample.txt
-printf 'ordinary text\n' > /tmp/harai-demo/notes.txt
-bin/harai scan /tmp/harai-demo; echo "exit=$?"
+mkdir -p /tmp/aratame-demo
+printf 'X5O!P%%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*' > /tmp/aratame-demo/sample.txt
+printf 'ordinary text\n' > /tmp/aratame-demo/notes.txt
+bin/aratame scan /tmp/aratame-demo; echo "exit=$?"
 ```
 
 ```
 INDICATORS	…/indicators.seed.edn	count=2	rejected=0	stale=false
-SUSPICIOUS	[:uncorroborated 1]	permit		/tmp/harai-demo/sample.txt
-CLEAN	[:no-signal]	permit		/tmp/harai-demo/notes.txt
+SUSPICIOUS	[:uncorroborated 1]	permit		/tmp/aratame-demo/sample.txt
+CLEAN	[:no-signal]	permit		/tmp/aratame-demo/notes.txt
 SCANNED	2
 ANSWER	complete	malicious=0 suspicious=1 unmeasured=0 clean=1
 exit=1
@@ -75,14 +75,14 @@ nothing. It is not a permission to act on the file.
 ## 3. A scan that cannot answer — the case that matters
 
 ```sh
-bin/harai scan /tmp/harai-demo --indicators /tmp/nope.edn; echo "exit=$?"
+bin/aratame scan /tmp/aratame-demo --indicators /tmp/nope.edn; echo "exit=$?"
 ```
 
 ```
 INDICATORS	unreadable	/tmp/nope.edn	ENOENT: no such file or directory, open '/tmp/nope.edn'
 INDICATORS	/tmp/nope.edn	count=0	rejected=0	stale=true	reason=:indicators/no-collection-time
-UNMEASURED	[:indicators/stale :indicators/no-collection-time]	permit		/tmp/harai-demo/notes.txt
-UNMEASURED	[:indicators/stale :indicators/no-collection-time]	permit		/tmp/harai-demo/sample.txt
+UNMEASURED	[:indicators/stale :indicators/no-collection-time]	permit		/tmp/aratame-demo/notes.txt
+UNMEASURED	[:indicators/stale :indicators/no-collection-time]	permit		/tmp/aratame-demo/sample.txt
 SCANNED	2
 ANSWER	partial	malicious=0 suspicious=0 unmeasured=2 clean=0
 exit=2
@@ -95,8 +95,8 @@ anything — and the answer is still `:unmeasured`, because nothing was matched
 ## 4. A sweep with nothing in it
 
 ```sh
-mkdir -p /tmp/harai-empty
-bin/harai scan /tmp/harai-empty; echo "exit=$?"
+mkdir -p /tmp/aratame-empty
+bin/aratame scan /tmp/aratame-empty; echo "exit=$?"
 ```
 
 ```
@@ -112,24 +112,24 @@ report that it found nothing.
 ## 5. The ledger
 
 ```sh
-bin/harai scan /tmp/harai-demo --ledger /tmp/harai-run.edn | tail -1
-head -1 /tmp/harai-run.edn
+bin/aratame scan /tmp/aratame-demo --ledger /tmp/aratame-run.edn | tail -1
+head -1 /tmp/aratame-run.edn
 ```
 
 ```
-LEDGER	/tmp/harai-run.edn	entries=4
-#:ledger{:seq 0, :prev nil, :kind :verdict, :at-ms 1787727791493, :actor "harai", :payload #:verdict{…
+LEDGER	/tmp/aratame-run.edn	entries=4
+#:ledger{:seq 0, :prev nil, :kind :verdict, :at-ms 1787727791493, :actor "aratame", :payload #:verdict{…
 ```
 
 Four entries for two files: one verdict and one governor decision each.
-Refusals are recorded with the same weight as permissions. `harai.ledger/verify`
+Refusals are recorded with the same weight as permissions. `aratame.ledger/verify`
 recomputes every digest and every link and returns `:entries` alongside `:ok?`,
 so an empty ledger cannot be read as a sound one.
 
 ## 6. Feeding it something real
 
 ```clojure
-(require '[harai.adapters :as a] '[harai.indicators :as ind])
+(require '[aratame.adapters :as a] '[aratame.indicators :as ind])
 
 (ind/indicator-set
  {:indicators (keep a/ti-record->indicator (:records ti-export))

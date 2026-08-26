@@ -1,7 +1,7 @@
-(ns harai.coverage-test
+(ns aratame.coverage-test
   "A sweep that examined nothing must not be able to say it found nothing."
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.coverage :as cov]))
+            [aratame.coverage :as cov]))
 
 (defn v [value] {:verdict/value value})
 

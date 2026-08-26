@@ -1,4 +1,4 @@
-(ns harai.verdict-test
+(ns aratame.verdict-test
   "The decision core, tested for the thing it exists to prevent: an answer that
   looks like 'nothing found' when nothing was looked at.
 
@@ -6,8 +6,8 @@
   fact under test, because a test that only asserts the outcome counts a run
   that failed for an unrelated reason as a success."
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.indicators :as ind]
-            [harai.verdict :as v]))
+            [aratame.indicators :as ind]
+            [aratame.verdict :as v]))
 
 (def now 1756200000000)                      ; a fixed moment; nothing here reads a clock
 (def day 86400000)

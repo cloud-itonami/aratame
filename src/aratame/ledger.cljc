@@ -1,4 +1,4 @@
-(ns harai.ledger
+(ns aratame.ledger
   "Append-only records of every verdict and every governor decision.
 
   A refusal is recorded with the same weight as a permission. A gate whose
@@ -15,7 +15,7 @@
               :ledger/prev prev
               :ledger/kind kind
               :ledger/at-ms at-ms
-              :ledger/actor (or actor "harai")
+              :ledger/actor (or actor "aratame")
               :ledger/payload payload}]
     (assoc body :ledger/digest (digest-fn (pr-str body)))))
 

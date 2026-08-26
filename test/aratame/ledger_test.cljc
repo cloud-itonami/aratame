@@ -1,6 +1,6 @@
-(ns harai.ledger-test
+(ns aratame.ledger-test
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.ledger :as l]))
+            [aratame.ledger :as l]))
 
 (defn digest [s] (str "d" (hash s)))
 

@@ -1,17 +1,17 @@
-(ns harai.governor
+(ns aratame.governor
   "The independent admission gate between a verdict and an action.
 
   It does not trust `:verdict/value`. It recounts corroboration from the
   signals the verdict carries, because a containment structure whose gate
   believes the thing it contains is decoration. Everything it can say is a
-  literal from `harai.taxonomy` — `refusals` and `escalations` are closed sets,
+  literal from `aratame.taxonomy` — `refusals` and `escalations` are closed sets,
   and the tests pin the literals so that renaming one upstream breaks its
   callers instead of silently widening what is permitted.
 
   Deny by default: an action that matches no permit rule is refused."
   (:require [clojure.string :as str]
-            [harai.taxonomy :as tax]
-            [harai.verdict :as v]))
+            [aratame.taxonomy :as tax]
+            [aratame.verdict :as v]))
 
 (def default-protected-prefixes
   "Paths nothing may be moved out of, whatever the verdict says. The system
@@ -22,7 +22,7 @@
    "/Library/Apple/" "/private/var/db/" "/.ssh/" "/.gnupg/"])
 
 (def default-policy
-  {:policy/id                          "harai.governor.v1"
+  {:policy/id                          "aratame.governor.v1"
    :protected-prefixes                 default-protected-prefixes
    :corroboration/floor                2
    :enforce/require-fresh-indicators   true

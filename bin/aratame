@@ -1,11 +1,11 @@
 #!/usr/bin/env nbb
-;; harai CLI launcher.
+;; aratame CLI launcher.
 ;;
 ;; Self-locating so the command works from any directory: it resolves the repo
 ;; root from its own path and re-invokes nbb with this repo's src on the
 ;; classpath. Written in nbb rather than sh per the repo-wide script-host rule
 ;; (ADR-2607173000; sh is not used for new scripts).
-(ns harai.bin.launcher
+(ns aratame.bin.launcher
   (:require ["node:child_process" :as cp]
             ["node:path" :as path]
             [clojure.string :as str]
@@ -14,7 +14,7 @@
 (def root (path/dirname (path/dirname nbb/*file*)))
 
 (defn- lib-classpath
-  "harai's own src plus the two kotoba-lang libraries it delegates to:
+  "aratame's own src plus the two kotoba-lang libraries it delegates to:
   macos-inventory (signing / provenance / XProtect probes) and quarantine
   (the reversible enforcement that the :quarantine action names)."
   []
@@ -25,7 +25,7 @@
 (def result
   (cp/spawnSync "nbb"
                 (clj->js (concat ["--classpath" (lib-classpath)
-                                  "-m" "harai.host.cli"]
+                                  "-m" "aratame.host.cli"]
                                  *command-line-args*))
                 #js {:stdio "inherit"}))
 

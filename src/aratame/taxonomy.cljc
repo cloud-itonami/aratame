@@ -1,4 +1,4 @@
-(ns harai.taxonomy
+(ns aratame.taxonomy
   "The controlled vocabulary of the verdict plane.
 
   Two of these definitions carry the whole product, and both are about what is

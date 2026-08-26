@@ -1,5 +1,5 @@
-(ns harai.host.cli
-  "`harai scan <path…>` and `harai doctor`.
+(ns aratame.host.cli
+  "`aratame scan <path…>` and `aratame doctor`.
 
   Two things this CLI does that scanners usually do not:
 
@@ -13,13 +13,13 @@
             ["node:path" :as path]
             [cljs.reader :as reader]
             [clojure.string :as str]
-            [harai.coverage :as cov]
-            [harai.governor :as gov]
-            [harai.host.probe :as probe]
-            [harai.indicators :as ind]
-            [harai.ledger :as led]
-            [harai.taxonomy :as tax]
-            [harai.verdict :as v]
+            [aratame.coverage :as cov]
+            [aratame.governor :as gov]
+            [aratame.host.probe :as probe]
+            [aratame.indicators :as ind]
+            [aratame.ledger :as led]
+            [aratame.taxonomy :as tax]
+            [aratame.verdict :as v]
             [nbb.core :as nbb]))
 
 (defn digest
@@ -35,7 +35,7 @@
   `:unmeasured` for every file whenever it is invoked from elsewhere — a correct
   answer arrived at for the wrong reason, which is the worst kind."
   (path/resolve (path/dirname nbb/*file*) ".." ".." ".."
-                "resources" "harai" "indicators.seed.edn"))
+                "resources" "aratame" "indicators.seed.edn"))
 
 ;; ---------------------------------------------------------------------------
 ;; args
@@ -194,7 +194,7 @@
                   "\tstale=" (:stale? stale)
                   (when (:reason stale) (str "\treason=" (:reason stale)))
                   (when err (str "\terror=" err))))
-    (println "NOTE\tOn a Mac, XProtect is the antivirus. harai judges what it is given"
+    (println "NOTE\tOn a Mac, XProtect is the antivirus. aratame judges what it is given"
              "and governs what may be done about it; it does not replace that.")
     (if (:stale? stale) 2 0)))
 
@@ -204,8 +204,8 @@
     (set! (.-exitCode js/process)
           (case cmd
             "scan" (if (empty? (:paths opts))
-                     (do (println "usage: harai scan <path…> [--indicators f.edn] [--ledger f.edn] [--max-files n] [--edn]")
+                     (do (println "usage: aratame scan <path…> [--indicators f.edn] [--ledger f.edn] [--max-files n] [--edn]")
                          2)
                      (scan opts))
             "doctor" (doctor opts)
-            (do (println "usage: harai <scan|doctor> …") 2)))))
+            (do (println "usage: aratame <scan|doctor> …") 2)))))

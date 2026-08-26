@@ -1,12 +1,12 @@
-(ns harai.governor-test
+(ns aratame.governor-test
   "The gate, tested against the ways it could be talked into acting.
 
   The load-bearing test is `a-forged-verdict-does-not-convince-the-gate`: the
   governor recounts corroboration from the signals rather than reading
   `:verdict/value`, so an upstream that inflates its own verdict gains nothing."
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.governor :as gov]
-            [harai.taxonomy :as tax]))
+            [aratame.governor :as gov]
+            [aratame.taxonomy :as tax]))
 
 (defn signal [kind source]
   {:signal/kind kind :signal/source-id source :signal/id :signal/test

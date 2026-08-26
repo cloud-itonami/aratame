@@ -1,4 +1,4 @@
-(ns harai.verdict
+(ns aratame.verdict
   "The decision core: facts about a subject, plus an indicator set, plus a
   policy, produce a verdict. Pure — no clock, no filesystem, no network; the
   moment is passed in.
@@ -14,11 +14,11 @@
     `:malicious` from evidence that does not depend on it (a revoked
     certificate is measured today regardless of feed age), but the absence of
     a hit in a stale set is not the absence of a threat."
-  (:require [harai.indicators :as ind]
-            [harai.taxonomy :as tax]))
+  (:require [aratame.indicators :as ind]
+            [aratame.taxonomy :as tax]))
 
 (def default-policy
-  {:policy/id                 "harai.default.v1"
+  {:policy/id                 "aratame.default.v1"
    :required-probes           #{:probe/sha256 :probe/signature}
    :corroboration/floor       2
    :confidence/floor          800
@@ -75,10 +75,10 @@
 (defn- heuristic-signals [{:keys [subject/persistence subject/signature subject/hidden?]}]
   (cond-> []
     (and persistence (contains? #{:unsigned :adhoc} signature))
-    (conj (signal :heuristic "harai.rules" :signal/unsigned-persistence 600 :white
+    (conj (signal :heuristic "aratame.rules" :signal/unsigned-persistence 600 :white
                   {:persistence persistence :signature signature}))
     hidden?
-    (conj (signal :heuristic "harai.rules" :signal/concealed-program 500 :white
+    (conj (signal :heuristic "aratame.rules" :signal/concealed-program 500 :white
                   {:hidden? true}))))
 
 (defn- provenance-signals [{:keys [subject/quarantine-xattr subject/signature]}]

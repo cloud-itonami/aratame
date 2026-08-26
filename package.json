@@ -1,13 +1,13 @@
 {
-  "name": "@cloud-itonami/harai",
+  "name": "@cloud-itonami/aratame",
   "version": "0.1.0",
   "private": true,
-  "description": "harai 祓 — governed malware verdict plane. A scan that could not run never returns the value a clean scan returns.",
+  "description": "aratame 祓 — governed malware verdict plane. A scan that could not run never returns the value a clean scan returns.",
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
-    "test": "nbb --classpath src:test:../../kotoba-lang/macos-inventory/src -m harai.test-runner",
-    "harai": "nbb --classpath src:../../kotoba-lang/macos-inventory/src:../../kotoba-lang/quarantine/src -m harai.host.cli"
+    "test": "nbb --classpath src:test:../../kotoba-lang/macos-inventory/src -m aratame.test-runner",
+    "aratame": "nbb --classpath src:../../kotoba-lang/macos-inventory/src:../../kotoba-lang/quarantine/src -m aratame.host.cli"
   },
   "devDependencies": {
     "nbb": "^1.4.208"

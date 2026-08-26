@@ -1,6 +1,6 @@
-(ns harai.indicators-test
+(ns aratame.indicators-test
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.indicators :as ind]))
+            [aratame.indicators :as ind]))
 
 (def now 1756200000000)
 (def day 86400000)

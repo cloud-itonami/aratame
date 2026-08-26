@@ -1,7 +1,7 @@
-(ns harai.adapters-test
+(ns aratame.adapters-test
   "The translations from the producers that already exist in this workspace."
   (:require [clojure.test :refer [deftest is testing]]
-            [harai.adapters :as a]))
+            [aratame.adapters :as a]))
 
 (deftest a-threat-intelligence-record-keeps-its-own-confidence-scale
   (let [rec {"indicatorType" "sha256" "value" "AB" "confidencePermille" 850
