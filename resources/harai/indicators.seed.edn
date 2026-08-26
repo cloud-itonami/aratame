@@ -1,0 +1,28 @@
+;; harai — bundled indicator seed.
+;;
+;; This file dates itself, and the default policy floor is 7 days. That is not
+;; an oversight: a bundled list with no expiry is exactly how a product ends up
+;; asserting "clean" from a list nobody has updated since the release. A week
+;; after this file was written, every verdict computed against it alone becomes
+;; :unmeasured until an operator points harai at a current feed.
+;;
+;; The one entry is the EICAR standard anti-malware test file — a published,
+;; deliberately harmless 68-byte string that exists so a detection path can be
+;; exercised end to end without handling a real sample. Its hashes were computed
+;; from the string itself, not copied from a page.
+{:set/source-id "harai.seed.v1"
+ :set/collected-at-ms 1787727536905
+ :set/note "Seed, not a feed. Point --indicators at cloud-itonami/threat-intelligence output for real coverage."
+ :indicators
+ [{:indicator/type :sha256
+   :indicator/value "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+   :indicator/confidence-permille 1000
+   :indicator/tlp :white
+   :indicator/source-id "eicar.org"
+   :indicator/description "EICAR standard anti-malware test file (68 bytes) — a test vector, not malware"}
+  {:indicator/type :md5
+   :indicator/value "44d88612fea8a8f36de82e1278abb02f"
+   :indicator/confidence-permille 1000
+   :indicator/tlp :white
+   :indicator/source-id "eicar.org"
+   :indicator/description "EICAR standard anti-malware test file (68 bytes) — a test vector, not malware"}]}
