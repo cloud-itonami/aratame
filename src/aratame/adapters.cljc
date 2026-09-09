@@ -8,7 +8,7 @@
   node, and `misogi-fact->subject` takes gftdcojp/misogi's fact map. When one
   of those changes shape, the translation is the thing that breaks — which is
   the point of having exactly one of them per producer."
-  (:require [kotoba.lang.text :as str]))
+  (:require [clojure.string :as str]))
 
 (defn- get* [m & ks]
   (some (fn [k] (or (get m k) (get m (keyword k)) (get m (name k)))) ks))
