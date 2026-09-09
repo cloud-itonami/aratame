@@ -12,7 +12,7 @@
             ["node:fs" :as fs]
             ["node:path" :as path]
             [cljs.reader :as reader]
-            [clojure.string :as str]
+            [kotoba.lang.text :as str]
             [aratame.coverage :as cov]
             [aratame.governor :as gov]
             [aratame.host.probe :as probe]
@@ -128,7 +128,7 @@
                 :governor/message (get tax/refusals :refuse/no-subject)}}))
 
 (defn- line [{:keys [path verdict decision]}]
-  (str/join "\t" [(str/upper-case (name (:verdict/value verdict)))
+  (str/join "\t" [(str/upper (name (:verdict/value verdict)))
                   (pr-str (:verdict/reason verdict))
                   (name (:governor/decision decision))
                   (str (or (:governor/reason decision) ""))

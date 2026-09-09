@@ -9,7 +9,7 @@
   callers instead of silently widening what is permitted.
 
   Deny by default: an action that matches no permit rule is refused."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [aratame.taxonomy :as tax]
             [aratame.verdict :as v]))
 
