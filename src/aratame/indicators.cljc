@@ -6,7 +6,7 @@
   of the answer. A set that cannot say when it was collected is stale, not
   fresh: an absent collection time is an unanswered question, and unanswered
   questions never resolve to the permissive value."
-  (:require [kotoba.lang.text :as str]))
+  (:require [clojure.string :as str]))
 
 (def hash-types #{:md5 :sha1 :sha256})
 (def indicator-types (into hash-types #{:ipv4 :ipv6 :domain :url :email :cve}))
@@ -19,9 +19,9 @@
   (when (string? v)
     (let [v (str/trim v)]
       (cond
-        (contains? hash-types t) (str/lower v)
-        (= :domain t)            (str/replace (str/lower v) #"\.$" "")
-        (= :email t)             (str/lower v)
+        (contains? hash-types t) (str/lower-case v)
+        (= :domain t)            (str/replace (str/lower-case v) #"\.$" "")
+        (= :email t)             (str/lower-case v)
         :else                    v))))
 
 (defn- indexable [{:keys [indicator/type indicator/value] :as ind}]

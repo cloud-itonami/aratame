@@ -4,7 +4,7 @@
   A refusal is recorded with the same weight as a permission. A gate whose
   refusals leave no trace is indistinguishable from a gate that was never
   consulted, and the second one is what an auditor will assume."
-  (:require [kotoba.lang.text :as str]))
+  (:require [clojure.string :as str]))
 
 (defn entry
   "One ledger record. `digest-fn` hashes the canonical string form; the host
