@@ -6,8 +6,8 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
-    "test": "nbb --classpath src:test:../../kotoba-lang/macos-inventory/src -m aratame.test-runner",
-    "aratame": "nbb --classpath src:../../kotoba-lang/macos-inventory/src:../../kotoba-lang/quarantine/src -m aratame.host.cli"
+    "test": "kbb --backend sci --classpath src:test:../../kotoba-lang/macos-inventory/src -m aratame.test-runner",
+    "aratame": "kbb --backend sci --classpath src:../../kotoba-lang/macos-inventory/src:../../kotoba-lang/quarantine/src -m aratame.host.cli"
   },
   "devDependencies": {
     "nbb": "^1.4.208"
