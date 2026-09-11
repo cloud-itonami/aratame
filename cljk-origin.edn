@@ -1,0 +1,21 @@
+{:format :kotoba.cljk-origin/v1
+ :renamed-on "2026-09-11"
+ :decision "adr-2609111500-cljk-rename-all-clojure-source (com-junkawasaki/root 90-docs/adr; owner instruction 2026-09-11)"
+ :rule "value = the extension the file had before the rename. A path ending in .clj.cljk or .cljs.cljk kept it in the name because both platform files existed (or the plain target was taken)."
+ :origins
+ {"src/aratame/adapters.cljk" ".cljc"
+  "src/aratame/coverage.cljk" ".cljc"
+  "src/aratame/governor.cljk" ".cljc"
+  "src/aratame/host/cli.cljk" ".cljs"
+  "src/aratame/host/probe.cljk" ".cljs"
+  "src/aratame/indicators.cljk" ".cljc"
+  "src/aratame/ledger.cljk" ".cljc"
+  "src/aratame/taxonomy.cljk" ".cljc"
+  "src/aratame/verdict.cljk" ".cljc"
+  "test/aratame/adapters_test.cljk" ".cljc"
+  "test/aratame/coverage_test.cljk" ".cljc"
+  "test/aratame/governor_test.cljk" ".cljc"
+  "test/aratame/indicators_test.cljk" ".cljc"
+  "test/aratame/ledger_test.cljk" ".cljc"
+  "test/aratame/test_runner.cljk" ".cljs"
+  "test/aratame/verdict_test.cljk" ".cljc"}}
