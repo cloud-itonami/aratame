@@ -1,5 +1,5 @@
 (ns aratame.ledger-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aratame.ledger :as l]))
 
 (defn digest [s] (str "d" (hash s)))

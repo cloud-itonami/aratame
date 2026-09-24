@@ -5,7 +5,7 @@
   Every negative case here is paired with a control that differs in exactly the
   fact under test, because a test that only asserts the outcome counts a run
   that failed for an unrelated reason as a success."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aratame.indicators :as ind]
             [aratame.verdict :as v]))
 
