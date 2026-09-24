@@ -4,7 +4,7 @@
   The load-bearing test is `a-forged-verdict-does-not-convince-the-gate`: the
   governor recounts corroboration from the signals rather than reading
   `:verdict/value`, so an upstream that inflates its own verdict gains nothing."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aratame.governor :as gov]
             [aratame.taxonomy :as tax]))
 

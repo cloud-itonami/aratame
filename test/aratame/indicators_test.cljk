@@ -1,5 +1,5 @@
 (ns aratame.indicators-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aratame.indicators :as ind]))
 
 (def now 1756200000000)

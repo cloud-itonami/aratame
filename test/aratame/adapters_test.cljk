@@ -1,6 +1,6 @@
 (ns aratame.adapters-test
   "The translations from the producers that already exist in this workspace."
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [kotoba.test :refer [deftest is testing]]
             [aratame.adapters :as a]))
 
 (deftest a-threat-intelligence-record-keeps-its-own-confidence-scale
